@@ -27,6 +27,9 @@
     <ClCompile Include="GFactory.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ImgWork.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Script.h">
@@ -36,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImgWork.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
