@@ -11,23 +11,26 @@ void Script::ShowMenu() {
 }
 
 void Script::start() {
-	ShowMenu();
-	int n;
-	cin >> n;
 	GFactory* factory = nullptr;
+	int n;
 	while (!is_end) {
+		ShowMenu();
+		cin >> n;
 		switch (n) {
 		case 1: {
 			factory = new CollapseFactory();
 			auto game = factory->CreateGame();
 			game->begin();
-			ShowMenu();
+			break;
 		}
 		case 2:
 			is_end = true;
+			break;
+
 		default: {
 			cout << "请输入正确的数字。";
 			ShowMenu();
+			break;
 		}
 		}
 	}
