@@ -13,10 +13,15 @@ public:
 
 	virtual void begin() = 0;
 	virtual void end() = 0;
+
+	ImgWork* work;
 };
 
+//×´Ì¬»ú´¦ÀíÂß¼­
 class collapse_three : public Game {
 public:
+	collapse_three();
+
 	void begin() final override;
 
 	void end() final override;

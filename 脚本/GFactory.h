@@ -1,14 +1,17 @@
 #pragma once
+#include <memory>
 #include "Game.h"
+
+using namespace std;
 
 class Game;
 //工厂模式
 class GFactory{
 public:
-	virtual Game* CreateGame() = 0;
+	virtual shared_ptr<Game> CreateGame() = 0;
 };
 
 class CollapseFactory : public GFactory {
 public:
-	Game* CreateGame() final override;
+	shared_ptr<Game> CreateGame() final override;
 };

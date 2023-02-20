@@ -15,9 +15,6 @@ class ImgWork{
 
 	void captureScreenMat();
 
-	//鼠标左键单击
-	void leftClick(const pair<int, int>&);
-
 	string gameSourceDir;
 
 	const static double zra;
@@ -31,5 +28,8 @@ public:
 	void changeGameDir(const string&);
 
 	//按照名称点击对应图标
-	void select(const string&);
+	bool can_select(const string&, pair<int, int>&);
+
+	//鼠标左键单击
+	void leftClick(const pair<int, int>&);
 };

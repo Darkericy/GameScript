@@ -1,4 +1,8 @@
 #include "Game.h"
+collapse_three::collapse_three() {
+	work = ImgWork::Instance();
+}
+
 void collapse_three::begin() {
 	system("cls");
 	while(!FindWindowA(nullptr, "崩坏3")) {
@@ -12,7 +16,6 @@ void collapse_three::begin() {
 		}
 	}
 
-	auto work = ImgWork::Instance();
 	system("cls");
 	cout << "崩坏三日常清理程序已启动，5秒后程序启动" << endl;
 	int temp = 5;
@@ -21,10 +24,9 @@ void collapse_three::begin() {
 		Sleep(1000);
 	}
 	work->changeGameDir("collapse_three");
-	work->select("start");
-	cout << "已启动"; 
+	work->can_select("start");
+	cout << "已启动" << endl;
 
-	end();
 }
 
 void collapse_three::end() {

@@ -80,8 +80,9 @@ void ImgWork::leftClick(const pair<int, int>& pos) {
     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 }
 
-void ImgWork::select(const string& target) {
+bool ImgWork::can_select(const string& target, pair<int, int>& pos) {
     captureScreenMat();
+
     Mat srcImage = imread("./temp/screenshot.jpg");  //原图
     Mat tempImage = imread(gameSourceDir + target + imageEnd); //模板图像
 
@@ -93,29 +94,19 @@ void ImgWork::select(const string& target) {
     //TM_SQDIFF:平方差匹配法  TM_SQDIFF_NORMED:归一化平方差匹配法  
     //TM_CCORR:相关匹配法 M_CCORR_NORMED:归一化相关匹配法  TM_CCOEFF:系数匹配法  TM_CCOEFF_NORMED:化相关系数匹配法
     matchTemplate(srcImage, tempImage, resultImage, method);    //模板匹配
-    normalize(resultImage, resultImage, 0, 1, NORM_MINMAX, -1, Mat());  //归一化处理
+    //normalize(resultImage, resultImage, 0, 1, NORM_MINMAX, -1, Mat());  //归一化处理
 
     double minValue, maxValue;
     Point minLocation, maxLocation, matchLocation;
 
     minMaxLoc(resultImage, &minValue, &maxValue, &minLocation, &maxLocation, Mat()); //在resultImage中矩阵的每一个点的亮度表示与模板T的匹配程度
 
-    if (method == TM_SQDIFF || method == TM_SQDIFF_NORMED)  //越小越匹配
-    {
-        matchLocation = minLocation;    //匹配图像的左上角
-    }
-    else //越大越匹配
-    {
-        matchLocation = maxLocation;
+    if (maxValue < 0.9) {
+        return false;
     }
 
-    //rectangle(srcImage, matchLocation, Point(matchLocation.x + tempImage.cols, matchLocation.y + tempImage.rows), Scalar(0, 0, 255), 2, 8, 0);
-    //std::cout << "左上角坐标:" << matchLocation << std::endl;
-    //std::cout << "右下角坐标：" << Point(matchLocation.x + tempImage.cols, matchLocation.y + tempImage.rows) << std::endl;
-    ////输出图像
-    //imwrite("./temp/图片.jpg", srcImage);
-
+    matchLocation = maxLocation;
     int x = (matchLocation.x + tempImage.cols) / 2, y = (matchLocation.y + tempImage.rows) / 2;
-    pair<int, int> pos = make_pair(x * zoom, y * zoom);
-    leftClick(pos);
+    pos = make_pair(x * zoom, y * zoom);
+    return true;
 }

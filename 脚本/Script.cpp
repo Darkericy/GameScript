@@ -21,6 +21,7 @@ void Script::start() {
 			factory = new CollapseFactory();
 			auto game = factory->CreateGame();
 			game->begin();
+			game->end();
 			break;
 		}
 		case 2:
